@@ -4,6 +4,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,33 @@ namespace ImageDemoWPF.ViewModels
         private ImageFileInfo _imageFile;
 
 
+        public string FullTargetName
+        {
+            get
+            {
+                if (ImageFile == null)
+                    return string.Empty;
+
+                if (ThumbWidth == ThumbHeight)
+                {
+                    return Path.Combine(TargetFolder,
+                            string.Format("{0}-{1}{2}",
+                                       Path.GetFileNameWithoutExtension(ImageFile.Name),
+                                       ThumbHeight,
+                                       TargetExtension));
+                }
+                else
+                {
+                    return Path.Combine(TargetFolder,
+                            string.Format("{0}-{1}x{2}{3}",
+                                       Path.GetFileNameWithoutExtension(ImageFile.Name),
+                                       ThumbWidth,
+                                       ThumbHeight,
+                                       TargetExtension));
+                }
+            }
+        }
+
         public string TargetFolder
         {
             get
@@ -45,17 +73,24 @@ namespace ImageDemoWPF.ViewModels
         }
         private string _targetFolder;
 
-
-        public int ThumbJpegQuality
+        public string TargetExtension
         {
-            get { return _thumbJpegQuality ?? defaultJpegQuality; }
+            get
+            {
+                return ImageFile != null ? ImageFile.Extension : string.Empty;
+            }
+        }
+
+        public int TargetJpegQuality
+        {
+            get { return _jpegQuality ?? defaultJpegQuality; }
             set
             {
-                _thumbJpegQuality = value;
+                _jpegQuality = value;
                 RaisePropertyChanged("ThumbJpegQuality");
             }
         }
-        private int? _thumbJpegQuality;
+        private int? _jpegQuality;
 
 
         public int ThumbHeight

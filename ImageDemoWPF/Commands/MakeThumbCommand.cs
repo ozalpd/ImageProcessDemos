@@ -18,7 +18,7 @@ namespace ImageDemoWPF.Commands
 
         public override bool CanExecute(object parameter)
         {
-            return ImageFile != null;
+            return ImageFile != null && ImageFile.Exists;
         }
 
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -29,24 +29,25 @@ namespace ImageDemoWPF.Commands
 
         public override void Execute(object parameter)
         {
-            var job = GetImageJob(ImageFile.Extension);
+            var job = GetImageJob();
+            job.CreateParentDirectory = true;
             job.Build();
         }
 
 
-        protected ImageJob GetImageJob(string format)
+        private ImageJob GetImageJob()
         {
             var instructions = new Instructions()
             {
-                Format = format,
+                Format = ViewModel.TargetExtension,
                 Height = ViewModel.ThumbHeight,
                 Width = ViewModel.ThumbWidth,
-                JpegQuality = ViewModel.ThumbJpegQuality,
+                JpegQuality = ViewModel.TargetJpegQuality,
                 Mode = FitMode.Crop
             };
 
             return new ImageJob(source: ImageFile.FullName,
-                                dest: Path.Combine(ViewModel.TargetFolder, ImageFile.Name),
+                                dest: ViewModel.FullTargetName,
                                 instructions: instructions);
         }
     }
