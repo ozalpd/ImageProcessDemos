@@ -48,6 +48,8 @@ namespace ImageDemoWPF.Models
         /// <see langword="true" /> if the file exists; <see langword="false" /> if the file does not exist or if the file is a directory.</returns>
         public bool Exists { get { return fileInfo.Exists; } }
 
+        public string Extension { get { return fileInfo.Extension; } }
+
         /// <summary>Gets the full path of the directory or file.</summary>
         /// <returns>A string containing the full path.</returns>
         /// <exception cref="T:System.IO.PathTooLongException">The fully qualified path and file name is 260 or more characters.</exception>
@@ -75,6 +77,8 @@ namespace ImageDemoWPF.Models
         /// <returns>The name of the file.</returns>
         public string Name { get { return fileInfo.Name; } }
 
-
+        /// <summary>Gets width and height of the current image a in proper string.</summary>
+        /// <returns>Width and height of the current image.</returns>
+        public string Size { get { return string.Format("{0}x{1} pixels", Width, Height); } }
     }
 }

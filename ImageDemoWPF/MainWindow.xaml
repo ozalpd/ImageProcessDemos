@@ -6,25 +6,52 @@
         xmlns:local="clr-namespace:ImageDemoWPF"
         xmlns:vm="clr-namespace:ImageDemoWPF.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Image Demos" Height="600" Width="800" MinHeight="320" MinWidth="640">
     <Window.DataContext>
         <vm:ImageDemoVM />
     </Window.DataContext>
     <Window.Resources>
         <Style TargetType="TextBlock" x:Key="inHorizStack">
-            <Setter Property="Margin" Value="4,6" />
+            <Setter Property="Margin" Value="4,8" />
+        </Style>
+        <Style TargetType="TextBox" x:Key="inHorizTextBox">
+            <Setter Property="Margin" Value="4,8,4,4" />
         </Style>
     </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="96"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="96"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="32"/>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
-        <Image x:Name="img" Source="{Binding ImageFile.BitmapImage, Mode=OneWay}"/>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button x:Name="btnOpenImage" Width="80" HorizontalAlignment="Left" Content="Open Image" Margin="4,4" Command="{Binding OpenCmd}"/>
-            <TextBlock Style="{StaticResource inHorizStack}" Text="{Binding ImageFile.Width,  Mode=OneWay, StringFormat=Width: \{0\}}"/>
-            <TextBlock Style="{StaticResource inHorizStack}" Text="{Binding ImageFile.Height, Mode=OneWay, StringFormat=Height: \{0\}}"/>
-        </StackPanel>
+        <Image Grid.ColumnSpan="4" Source="{Binding ImageFile.BitmapImage, Mode=OneWay}"/>
+        <Button Grid.Column="0" Grid.Row="1" Content="Open Image" Margin="4,4" Command="{Binding OpenCommand}"/>
+        <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource inHorizStack}" Text="{Binding ImageFile.Size, Mode=OneWay, StringFormat=Size: \{0\}}"/>
+
+        <!--Make Thumb Elements-->
+        <Button Grid.Column="0" Grid.Row="2" Content="Make Thumb" Margin="4,4" Command="{Binding MakeThumbCommand}"/>
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Style="{StaticResource inHorizStack}" Text="Target Width:"/>
+            <TextBox Grid.Column="1" Style="{StaticResource inHorizTextBox}" Text="{Binding ThumbWidth}" TextAlignment="Right"/>
+            <TextBlock Grid.Column="2" Style="{StaticResource inHorizStack}" Text="Height:"/>
+            <TextBox Grid.Column="3" Style="{StaticResource inHorizTextBox}" Text="{Binding ThumbHeight}" TextAlignment="Right"/>
+        </Grid>
+
+        <TextBlock Grid.Column="2" Grid.Row="2" Style="{StaticResource inHorizStack}" Text="Target Folder:"/>
+        <TextBox Grid.Column="3" Grid.Row="2" Style="{StaticResource inHorizTextBox}" Text="{Binding TargetFolder}"/>
+        <!--Make Thumb Ends-->
     </Grid>
 </Window>

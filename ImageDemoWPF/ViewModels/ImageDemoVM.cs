@@ -1,7 +1,9 @@
-﻿using ImageDemoWPF.Models;
+﻿using ImageDemoWPF.Commands;
+using ImageDemoWPF.Models;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +12,11 @@ namespace ImageDemoWPF.ViewModels
 {
     public class ImageDemoVM : AbstractViewModel
     {
+        //default thumb width or height
+        private const int defaultThumbSize = 128;
+        private const int defaultJpegQuality = 90;
+
+
         public ImageFileInfo ImageFile
         {
             get { return _imageFile; }
@@ -22,7 +29,62 @@ namespace ImageDemoWPF.ViewModels
         private ImageFileInfo _imageFile;
 
 
-        public OpenCommand OpenCmd
+        public string TargetFolder
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_targetFolder))
+                    _targetFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                return _targetFolder;
+            }
+            set
+            {
+                _targetFolder = value;
+                RaisePropertyChanged("TargetFolder");
+            }
+        }
+        private string _targetFolder;
+
+
+        public int ThumbJpegQuality
+        {
+            get { return _thumbJpegQuality ?? defaultJpegQuality; }
+            set
+            {
+                _thumbJpegQuality = value;
+                RaisePropertyChanged("ThumbJpegQuality");
+            }
+        }
+        private int? _thumbJpegQuality;
+
+
+        public int ThumbHeight
+        {
+            get { return _thumbHeight ?? defaultThumbSize; }
+            set
+            {
+                _thumbHeight = value;
+                RaisePropertyChanged("ThumbHeight");
+            }
+        }
+        private int? _thumbHeight;
+
+
+        public int ThumbWidth
+        {
+            get { return _thumbWidth ?? defaultThumbSize; }
+            set
+            {
+                _thumbWidth = value;
+                RaisePropertyChanged("ThumbWidth");
+            }
+        }
+        private int? _thumbWidth;
+
+
+
+
+        public OpenCommand OpenCommand
         {
             set { _openCommand = value; }
             get
@@ -35,28 +97,18 @@ namespace ImageDemoWPF.ViewModels
         private OpenCommand _openCommand;
 
 
-
-        public class OpenCommand : AbstractCommand
+        public MakeThumbCommand MakeThumbCommand
         {
-            public OpenCommand(ImageDemoVM viewModel)
+            set { _makeThumb = value; }
+            get
             {
-                ViewModel = viewModel;
-            }
-
-            public ImageDemoVM ViewModel { get; private set; }
-
-            public override void Execute(object parameter)
-            {
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-                                        "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-                                        "Portable Network Graphic (*.png)|*.png";
-
-                if (openFileDialog.ShowDialog() != true)
-                    return;
-
-                ViewModel.ImageFile = new ImageFileInfo(openFileDialog.FileName);
+                if (_makeThumb == null)
+                    _makeThumb = new MakeThumbCommand(this);
+                return _makeThumb;
             }
         }
+        private MakeThumbCommand _makeThumb;
+
+
     }
 }

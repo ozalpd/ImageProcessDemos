@@ -61,8 +61,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModels\AbstractCommand.cs" />
+    <Compile Include="Commands\AbstractCommand.cs" />
+    <Compile Include="Commands\MakeThumbCommand.cs" />
     <Compile Include="ViewModels\AbstractViewModel.cs" />
+    <Compile Include="Commands\OpenCommand.cs" />
     <Compile Include="ViewModels\ImageDemoVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

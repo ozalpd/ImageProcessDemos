@@ -1,10 +1,17 @@
-﻿using System;
+﻿using ImageDemoWPF.ViewModels;
+using System;
 using System.Windows.Input;
 
-namespace ImageDemoWPF.ViewModels
+namespace ImageDemoWPF.Commands
 {
     public abstract class AbstractCommand : ICommand
     {
+        public AbstractCommand(ImageDemoVM viewModel)
+        {
+            ViewModel = viewModel;
+        }
+        public ImageDemoVM ViewModel { get; private set; }
+
         public abstract void Execute(object parameter);
 
         public virtual bool CanExecute(object parameter)
