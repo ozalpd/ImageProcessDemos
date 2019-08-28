@@ -1,20 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.757
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageDemoWPF", "ImageDemoWPF\ImageDemoWPF.csproj", "{9A1612A2-63FF-4C78-810C-C551F5720447}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagickDemo", "MagickDemo\MagickDemo.csproj", "{20AF6078-E28D-49BA-BC7C-D5E97BE247E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9A1612A2-63FF-4C78-810C-C551F5720447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9A1612A2-63FF-4C78-810C-C551F5720447}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A1612A2-63FF-4C78-810C-C551F5720447}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9A1612A2-63FF-4C78-810C-C551F5720447}.Debug|x64.Build.0 = Debug|Any CPU
 		{9A1612A2-63FF-4C78-810C-C551F5720447}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A1612A2-63FF-4C78-810C-C551F5720447}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A1612A2-63FF-4C78-810C-C551F5720447}.Release|x64.ActiveCfg = Release|Any CPU
+		{9A1612A2-63FF-4C78-810C-C551F5720447}.Release|x64.Build.0 = Release|Any CPU
+		{20AF6078-E28D-49BA-BC7C-D5E97BE247E2}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{20AF6078-E28D-49BA-BC7C-D5E97BE247E2}.Debug|x64.ActiveCfg = Debug|x64
+		{20AF6078-E28D-49BA-BC7C-D5E97BE247E2}.Debug|x64.Build.0 = Debug|x64
+		{20AF6078-E28D-49BA-BC7C-D5E97BE247E2}.Release|Any CPU.ActiveCfg = Release|x64
+		{20AF6078-E28D-49BA-BC7C-D5E97BE247E2}.Release|x64.ActiveCfg = Release|x64
+		{20AF6078-E28D-49BA-BC7C-D5E97BE247E2}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
