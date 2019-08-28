@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageDemoWPF", "ImageDemoWP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagickDemo", "MagickDemo\MagickDemo.csproj", "{20AF6078-E28D-49BA-BC7C-D5E97BE247E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageDemo", "ImageDemo\ImageDemo.csproj", "{C69C11A8-BFFF-4026-AB67-D16320C277C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,14 @@ Global
 		{20AF6078-E28D-49BA-BC7C-D5E97BE247E2}.Release|Any CPU.ActiveCfg = Release|x64
 		{20AF6078-E28D-49BA-BC7C-D5E97BE247E2}.Release|x64.ActiveCfg = Release|x64
 		{20AF6078-E28D-49BA-BC7C-D5E97BE247E2}.Release|x64.Build.0 = Release|x64
+		{C69C11A8-BFFF-4026-AB67-D16320C277C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C69C11A8-BFFF-4026-AB67-D16320C277C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C69C11A8-BFFF-4026-AB67-D16320C277C1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C69C11A8-BFFF-4026-AB67-D16320C277C1}.Debug|x64.Build.0 = Debug|Any CPU
+		{C69C11A8-BFFF-4026-AB67-D16320C277C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C69C11A8-BFFF-4026-AB67-D16320C277C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C69C11A8-BFFF-4026-AB67-D16320C277C1}.Release|x64.ActiveCfg = Release|Any CPU
+		{C69C11A8-BFFF-4026-AB67-D16320C277C1}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

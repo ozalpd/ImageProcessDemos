@@ -3,7 +3,7 @@ using System.IO;
 using System.Security;
 using System.Windows.Media.Imaging;
 
-namespace ImageDemoWPF.Models
+namespace ImageDemo.Models
 {
     public class ImageFileInfo
     {
@@ -18,7 +18,7 @@ namespace ImageDemoWPF.Models
         private FileInfo fileInfo;
 
 
-       
+
         public BitmapImage BitmapImage
         {
             get

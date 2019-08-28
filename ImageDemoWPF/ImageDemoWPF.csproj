@@ -61,9 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\AbstractCommand.cs" />
     <Compile Include="Commands\MakeThumbCommand.cs" />
-    <Compile Include="ViewModels\AbstractViewModel.cs" />
     <Compile Include="Commands\OpenCommand.cs" />
     <Compile Include="ViewModels\ImageDemoVM.cs" />
     <Page Include="MainWindow.xaml">
@@ -80,7 +78,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\ImageFileInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -107,6 +104,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ImageDemo\ImageDemo.csproj">
+      <Project>{c69c11a8-bfff-4026-ab67-d16320c277c1}</Project>
+      <Name>ImageDemo</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

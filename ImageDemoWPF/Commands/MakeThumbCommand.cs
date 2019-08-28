@@ -1,4 +1,5 @@
-﻿using ImageDemoWPF.Models;
+﻿using ImageDemo.Commands;
+using ImageDemo.Models;
 using ImageDemoWPF.ViewModels;
 using ImageResizer;
 using System;
