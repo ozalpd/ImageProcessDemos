@@ -1,4 +1,6 @@
-﻿using ImageMagick;
+﻿using ImageDemo.Models;
+using ImageMagick;
+using MagickDemo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,17 +31,18 @@ namespace MagickDemo
 
         public MainWindow(string startupFile) : this()
         {
-            StartupFile = new FileInfo(startupFile);
+            StartupFile = startupFile;
         }
 
-        public FileInfo StartupFile { get; private set; }
+        public string StartupFile { get; private set; }
+        public MagickDemoVM ViewModel { get { return (MagickDemoVM)DataContext; } }
 
-        private void SaveICO(FileInfo inputFile)
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            using (MagickImage image = new MagickImage(inputFile))
+            if (!string.IsNullOrEmpty(StartupFile))
             {
-                image.Settings.SetDefine(MagickFormat.Icon, "auto-resize", "256,128,64,48,32,16");
-                image.Write(inputFile.Replace(inputFile.Extension, ".ico"));
+                ViewModel.ImageFile = new ImageFileInfo(StartupFile);
             }
         }
     }

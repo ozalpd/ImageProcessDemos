@@ -1,13 +1,12 @@
-﻿using ImageDemo.Commands;
-using ImageDemo.Models;
-using ImageDemoWPF.ViewModels;
+﻿using ImageDemo.Models;
+using ImageDemo.ViewModels;
 using Microsoft.Win32;
 
-namespace ImageDemoWPF.Commands
+namespace ImageDemo.Commands
 {
     public class OpenCommand : AbstractCommand
     {
-        public OpenCommand(ImageDemoVM viewModel) : base(viewModel) { }
+        public OpenCommand(AbstractViewModel viewModel) : base(viewModel) { }
 
         public override void Execute(object parameter)
         {

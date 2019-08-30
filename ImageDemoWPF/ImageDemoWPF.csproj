@@ -62,7 +62,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\MakeThumbCommand.cs" />
-    <Compile Include="Commands\OpenCommand.cs" />
     <Compile Include="ViewModels\ImageDemoVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -1,4 +1,5 @@
-﻿using ImageDemo.Models;
+﻿using ImageDemo.Commands;
+using ImageDemo.Models;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -19,59 +20,103 @@ namespace ImageDemo.ViewModels
             {
                 _imageFile = value;
                 RaisePropertyChanged("ImageFile");
+                if (string.IsNullOrEmpty(TargetExtension))
+                {
+                    TargetExtension = ImageFile.Extension;
+                }
             }
         }
         private ImageFileInfo _imageFile;
 
+        public string TargetExtension
+        {
+            get { return _targetExtension; }
+            set
+            {
+                _targetExtension = value.Trim();
+                if (!_targetExtension.StartsWith("."))
+                    _targetExtension = string.Format(".{0}", _targetExtension);
 
-        public string FullTargetName
+                RaisePropertyChanged("TargetExtension");
+                RaisePropertyChanged("TargetResizeFileName");
+                RaisePropertyChanged("TargetFileName");
+            }
+        }
+        private string _targetExtension;
+
+        public string TargetFileName
+        {
+            get
+            {
+                return ImageFile != null
+                    ? Path.Combine(TargetDirectory,
+                           string.Format("{0}{1}",
+                                      Path.GetFileNameWithoutExtension(ImageFile.Name),
+                                      TargetExtension))
+                    : string.Empty;
+            }
+        }
+
+        public string TargetDirectory
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_targetDir))
+                    _targetDir = GetTargetDirectory();
+                return _targetDir;
+            }
+            set
+            {
+                _targetDir = value;
+                RaisePropertyChanged("TargetDirectory");
+                RaisePropertyChanged("TargetResizeFileName");
+                RaisePropertyChanged("TargetFileName");
+            }
+        }
+        private string _targetDir;
+
+        /// <summary>
+        /// Checks the TargetDirectory if it exists, if it doesn't creates it
+        /// </summary>
+        public void CreateTargetDirectory()
+        {
+            if (!Directory.Exists(TargetDirectory))
+                Directory.CreateDirectory(TargetDirectory);
+        }
+
+        /// <summary>
+        /// Gets a default TargetDirectory
+        /// </summary>
+        /// <returns></returns>
+        public virtual string GetTargetDirectory()
+        {
+            return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        }
+
+        public string TargetResizeFileName
         {
             get
             {
                 if (ImageFile == null)
                     return string.Empty;
 
-                if (ThumbWidth == ThumbHeight)
+                if (TargetWidth == TargetHeight)
                 {
-                    return Path.Combine(TargetFolder,
+                    return Path.Combine(TargetDirectory,
                             string.Format("{0}-{1}{2}",
                                        Path.GetFileNameWithoutExtension(ImageFile.Name),
-                                       ThumbHeight,
+                                       TargetHeight,
                                        TargetExtension));
                 }
                 else
                 {
-                    return Path.Combine(TargetFolder,
+                    return Path.Combine(TargetDirectory,
                             string.Format("{0}-{1}x{2}{3}",
                                        Path.GetFileNameWithoutExtension(ImageFile.Name),
-                                       ThumbWidth,
-                                       ThumbHeight,
+                                       TargetWidth,
+                                       TargetHeight,
                                        TargetExtension));
                 }
-            }
-        }
-
-        public string TargetFolder
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(_targetFolder))
-                    _targetFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                return _targetFolder;
-            }
-            set
-            {
-                _targetFolder = value;
-                RaisePropertyChanged("TargetFolder");
-            }
-        }
-        private string _targetFolder;
-
-        public string TargetExtension
-        {
-            get
-            {
-                return ImageFile != null ? ImageFile.Extension : string.Empty;
             }
         }
 
@@ -81,35 +126,51 @@ namespace ImageDemo.ViewModels
             set
             {
                 _jpegQuality = value;
-                RaisePropertyChanged("ThumbJpegQuality");
+                RaisePropertyChanged("TargetJpegQuality");
             }
         }
         private int? _jpegQuality;
 
 
-        public int ThumbHeight
+        public int TargetHeight
         {
-            get { return _thumbHeight ?? defaultThumbSize; }
+            get { return _targetHeight ?? defaultThumbSize; }
             set
             {
-                _thumbHeight = value;
-                RaisePropertyChanged("ThumbHeight");
+                _targetHeight = value;
+                RaisePropertyChanged("TargetHeight");
             }
         }
-        private int? _thumbHeight;
+        private int? _targetHeight;
 
-
-        public int ThumbWidth
+        public int TargetWidth
         {
-            get { return _thumbWidth ?? defaultThumbSize; }
+            get { return _targetWidth ?? defaultThumbSize; }
             set
             {
-                _thumbWidth = value;
-                RaisePropertyChanged("ThumbWidth");
+                _targetWidth = value;
+                RaisePropertyChanged("TargetWidth");
             }
         }
-        private int? _thumbWidth;
+        private int? _targetWidth;
 
+
+
+        public OpenCommand OpenCommand
+        {
+            get
+            {
+                if (_openCommand == null)
+                    _openCommand = GetOpenCommand();
+                return _openCommand;
+            }
+        }
+        private OpenCommand _openCommand;
+
+        protected virtual OpenCommand GetOpenCommand()
+        {
+            return new OpenCommand(this);
+        }
 
 
         protected virtual void RaisePropertyChanged(string propertyName)

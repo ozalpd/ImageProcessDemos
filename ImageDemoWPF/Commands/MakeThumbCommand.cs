@@ -8,25 +8,10 @@ using System.IO;
 
 namespace ImageDemoWPF.Commands
 {
-    public class MakeThumbCommand : AbstractCommand
+    public class MakeThumbCommand : AbstractImageCommand
     {
-        public MakeThumbCommand(ImageDemoVM viewModel) : base(viewModel)
-        {
-            viewModel.PropertyChanged += OnViewModelPropertyChanged;
-        }
+        public MakeThumbCommand(ImageDemoVM viewModel) : base(viewModel) { }
 
-        private ImageFileInfo ImageFile { get { return ViewModel.ImageFile; } }
-
-        public override bool CanExecute(object parameter)
-        {
-            return ImageFile != null && ImageFile.Exists;
-        }
-
-        private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName.Equals("ImageFile"))
-                RaiseCanExecuteChanged();
-        }
 
         public override void Execute(object parameter)
         {
@@ -41,14 +26,14 @@ namespace ImageDemoWPF.Commands
             var instructions = new Instructions()
             {
                 Format = ViewModel.TargetExtension,
-                Height = ViewModel.ThumbHeight,
-                Width = ViewModel.ThumbWidth,
+                Height = ViewModel.TargetHeight,
+                Width = ViewModel.TargetWidth,
                 JpegQuality = ViewModel.TargetJpegQuality,
                 Mode = FitMode.Crop
             };
 
             return new ImageJob(source: ImageFile.FullName,
-                                dest: ViewModel.FullTargetName,
+                                dest: ViewModel.TargetResizeFileName,
                                 instructions: instructions);
         }
     }

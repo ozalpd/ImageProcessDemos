@@ -14,20 +14,6 @@ namespace ImageDemoWPF.ViewModels
 {
     public class ImageDemoVM : AbstractViewModel
     {
-
-        public OpenCommand OpenCommand
-        {
-            set { _openCommand = value; }
-            get
-            {
-                if (_openCommand == null)
-                    _openCommand = new OpenCommand(this);
-                return _openCommand;
-            }
-        }
-        private OpenCommand _openCommand;
-
-
         public MakeThumbCommand MakeThumbCommand
         {
             set { _makeThumb = value; }
