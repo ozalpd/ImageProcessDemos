@@ -15,9 +15,13 @@ namespace ImageDemoWPF.Commands
 
         public override void Execute(object parameter)
         {
+            DateTime startTime = DateTime.Now;
+
             var job = GetImageJob();
             job.CreateParentDirectory = true;
             job.Build();
+
+            ViewModel.ElapsedTime = DateTime.Now.Subtract(startTime);
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using ImageMagick;
 using MagickDemo.ViewModels;
+using System;
 
 namespace MagickDemo.Commands
 {
@@ -10,6 +11,7 @@ namespace MagickDemo.Commands
 
         public override void Execute(object parameter)
         {
+            DateTime startTime = DateTime.Now;
             ViewModel.CreateTargetDirectory();
 
             string targetExt = ViewModel.TargetExtension;
@@ -32,10 +34,11 @@ namespace MagickDemo.Commands
             }
 
             if (ViewModel.OptimizeTarget)
-                base.Execute(parameter);
+                base.Execute(ViewModel.TargetFileName);
 
 
             ViewModel.TargetExtension = targetExt;
+            ViewModel.ElapsedTime = DateTime.Now.Subtract(startTime);
         }
     }
 }

@@ -18,8 +18,16 @@ namespace ImageDemo.ViewModels
             get { return _imageFile; }
             set
             {
+                if (_imageFile == value)
+                    return;
+
+                if (string.IsNullOrEmpty(TargetExtension)
+                    || _imageFile.Extension.Equals(TargetExtension, StringComparison.Ordinal))
+                    _targetExtension = string.Empty;
+
                 _imageFile = value;
                 RaisePropertyChanged("ImageFile");
+
                 if (string.IsNullOrEmpty(TargetExtension))
                 {
                     TargetExtension = ImageFile.Extension;
@@ -27,6 +35,26 @@ namespace ImageDemo.ViewModels
             }
         }
         private ImageFileInfo _imageFile;
+
+        public bool KeepAspectRatio
+        {
+            get
+            {
+                if (_keepAspectRatio == null)
+                    _keepAspectRatio = true;
+                return _keepAspectRatio.Value;
+            }
+            set
+            {
+                if (_keepAspectRatio != value)
+                {
+                    _keepAspectRatio = value;
+                    RaisePropertyChanged("KeepAspectRatio");
+                }
+            }
+        }
+        private bool? _keepAspectRatio;
+
 
         public string TargetExtension
         {
@@ -155,6 +183,16 @@ namespace ImageDemo.ViewModels
         private int? _targetWidth;
 
 
+        public TimeSpan? ElapsedTime
+        {
+            get { return _elapsedTime; }
+            set
+            {
+                _elapsedTime = value;
+                RaisePropertyChanged("ElapsedTime");
+            }
+        }
+        private TimeSpan? _elapsedTime;
 
         public OpenCommand OpenCommand
         {
