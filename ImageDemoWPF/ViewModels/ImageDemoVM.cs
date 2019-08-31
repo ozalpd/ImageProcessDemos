@@ -27,5 +27,10 @@ namespace ImageDemoWPF.ViewModels
         private MakeThumbCommand _makeThumb;
 
 
+
+        public override string GetTargetDirectory()
+        {
+            return Path.Combine(base.GetTargetDirectory(), "ImageResizerDemo");
+        }
     }
 }

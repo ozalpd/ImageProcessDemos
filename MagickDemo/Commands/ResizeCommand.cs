@@ -40,6 +40,12 @@ namespace MagickDemo.Commands
                 }
 
                 size.IgnoreAspectRatio = !ViewModel.KeepAspectRatio;
+                image.Quality = ViewModel.TargetJpegQuality;
+                //image.Settings.Compression = CompressionMethod.LosslessJPEG;
+                image.Strip();
+                image.FilterType = FilterType.Lanczos;
+                //image.ColorSpace = ColorSpace.sRGB;
+                //image.Depth = 8;
                 image.Resize(size);
 
                 if (cropIt)

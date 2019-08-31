@@ -9,6 +9,8 @@
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
+#SampleData Files
+[Ss]ample[Dd]ata/
 
 # Build results
 [Dd]ebug/
