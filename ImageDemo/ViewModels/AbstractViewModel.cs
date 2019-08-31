@@ -148,16 +148,16 @@ namespace ImageDemo.ViewModels
             }
         }
 
-        public int TargetJpegQuality
+        public int TargetQuality
         {
-            get { return _jpegQuality ?? defaultJpegQuality; }
+            get { return _targQuality ?? defaultJpegQuality; }
             set
             {
-                _jpegQuality = value;
-                RaisePropertyChanged("TargetJpegQuality");
+                _targQuality = value;
+                RaisePropertyChanged("TargetQuality");
             }
         }
-        private int? _jpegQuality;
+        private int? _targQuality;
 
 
         public int TargetHeight

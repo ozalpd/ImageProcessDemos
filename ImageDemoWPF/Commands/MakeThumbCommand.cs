@@ -32,7 +32,7 @@ namespace ImageDemoWPF.Commands
                 Format = ViewModel.TargetExtension,
                 Height = ViewModel.TargetHeight,
                 Width = ViewModel.TargetWidth,
-                JpegQuality = ViewModel.TargetJpegQuality,
+                JpegQuality = ViewModel.TargetQuality,
                 Mode = FitMode.Crop
             };
 

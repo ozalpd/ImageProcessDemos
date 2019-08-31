@@ -21,7 +21,7 @@ namespace MagickDemo.Commands
             {
                 MagickGeometry size;
                 bool cropIt = false;
-                if (ViewModel.KeepAspectRatio) //Keep Aspect Ratio by cropping
+                if (ViewModel.KeepAspectRatio && ViewModel.TargetWidth > 0 && ViewModel.TargetHeight > 0) //Keep Aspect Ratio by cropping
                 {
                     double rateW = (double)ViewModel.TargetWidth / ImageFile.Width;
                     double rateH = (double)ViewModel.TargetHeight / ImageFile.Height;
@@ -40,12 +40,11 @@ namespace MagickDemo.Commands
                 }
 
                 size.IgnoreAspectRatio = !ViewModel.KeepAspectRatio;
-                image.Quality = ViewModel.TargetJpegQuality;
+
+                image.Quality = ViewModel.TargetQuality;
                 //image.Settings.Compression = CompressionMethod.LosslessJPEG;
                 image.Strip();
-                image.FilterType = FilterType.Lanczos;
-                //image.ColorSpace = ColorSpace.sRGB;
-                //image.Depth = 8;
+                image.FilterType = FilterType.Lanczos2Sharp; //this seems better to me in some downsampled images - ozalp 2019.08.31
                 image.Resize(size);
 
                 if (cropIt)

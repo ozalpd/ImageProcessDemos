@@ -22,7 +22,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="96"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="24"/>
             <ColumnDefinition Width="96"/>
             <ColumnDefinition Width="96"/>
             <ColumnDefinition Width="*"/>
@@ -38,40 +37,55 @@
         <Button Grid.Column="0" Grid.Row="1" Content="Open Image" Margin="4,4" Command="{Binding OpenCommand}"/>
         <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource inHorizStack}" Text="{Binding ImageFile.Size, Mode=OneWay, StringFormat=Size: \{0\}}"/>
 
-        <TextBlock Grid.Column="3" Grid.Row="1" Style="{StaticResource inHorizStack}" Text="Optimize Target" ToolTip="Optimize Target after operation"/>
-        <CheckBox Grid.Column="2" Grid.Row="1" Margin="4,10,0,0" IsChecked="{Binding OptimizeTarget}" ToolTip="Optimize Target after operation" />
-        
-        <TextBlock Grid.Column="4" Grid.Row="1" Style="{StaticResource inHorizStack}" Text="Target Folder:"/>
-        <TextBox Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource inHorizTextBox}" Text="{Binding TargetDirectory}"/>
-
-        <TextBlock Grid.Column="3" Grid.Row="2" Style="{StaticResource inHorizStack}" Text="Keep Aspect" ToolTip="Keep Aspect Ratio"/>
-        <CheckBox Grid.Column="2" Grid.Row="2" Margin="4,10,0,0" IsChecked="{Binding KeepAspectRatio}" ToolTip="Keep Aspect Ratio" />
-        
-        <TextBlock Grid.Column="4" Grid.Row="2" Style="{StaticResource inHorizStack}" Text="Target Extension:"/>
-        <TextBox Grid.Column="5" Grid.Row="2" Style="{StaticResource inHorizTextBox}" Text="{Binding TargetExtension}"/>
+        <TextBlock Grid.Column="3" Grid.Row="1" Style="{StaticResource inHorizStack}" Text="Target Folder:"/>
+        <TextBox Grid.Column="4" Grid.Row="1" Style="{StaticResource inHorizTextBox}" Text="{Binding TargetDirectory}"/>
 
         <!--Resize Image Elements-->
         <Button Grid.Column="0" Grid.Row="2" Content="Resize Image" Margin="4,4" Command="{Binding ResizeCommand}"/>
-        <Grid Grid.Column="1" Grid.Row="2">
+
+        <Grid Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="48"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Style="{StaticResource inHorizStack}" Text="Target Width:"/>
+            <TextBlock Grid.Column="0" Style="{StaticResource inHorizStack}" Text="Target Width:" ToolTip="Target Width"/>
             <TextBox Grid.Column="1" Style="{StaticResource inHorizTextBox}" Text="{Binding TargetWidth}" TextAlignment="Right"/>
-            <TextBlock Grid.Column="2" Style="{StaticResource inHorizStack}" Text="Height:"/>
+            <TextBlock Grid.Column="2" Style="{StaticResource inHorizStack}" Text="Height:" ToolTip="Target Height"/>
             <TextBox Grid.Column="3" Style="{StaticResource inHorizTextBox}" Text="{Binding TargetHeight}" TextAlignment="Right"/>
+
+            <TextBlock Grid.Column="4" Style="{StaticResource inHorizStack}" Text="Quality:" ToolTip="Target Quality"/>
+            <TextBox Grid.Column="5" Style="{StaticResource inHorizTextBox}" Text="{Binding TargetQuality}" TextAlignment="Right"/>
+
+            <TextBlock Grid.Column="6" Style="{StaticResource inHorizStack}" Text="Extension:" ToolTip="Target Extension"/>
+            <TextBox Grid.Column="7" Style="{StaticResource inHorizTextBox}" Text="{Binding TargetExtension}"/>
         </Grid>
 
         <!--Resize Image Ends-->
+        <Grid Grid.Column="1" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="24"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="24"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" Grid.Row="2" Style="{StaticResource inHorizStack}" Text="Keep Aspect Ratio" ToolTip="Keep Aspect Ratio"/>
+            <CheckBox Grid.Column="0" Margin="4,10,0,0" IsChecked="{Binding KeepAspectRatio}" ToolTip="Keep Aspect Ratio" />
+
+            <TextBlock Grid.Column="3" Style="{StaticResource inHorizStack}" Text="Optimize Target" ToolTip="Optimize Target after operation"/>
+            <CheckBox Grid.Column="2"  Margin="4,10,0,0" IsChecked="{Binding OptimizeTarget}" ToolTip="Optimize Target after operation" />
+        </Grid>
 
         <Button Grid.Column="0" Grid.Row="3" Content="Make Icon File" Margin="4,4" Command="{Binding MakeWin32Icon}"/>
-        
-        <Button Grid.Column="3" Grid.Row="3" Content="Optimize" Margin="4,4" Command="{Binding OptimizeTargetImage}"/>
 
-        <TextBlock Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="3" Style="{StaticResource inHorizStack}" Text="{Binding ElapsedTime, Mode=OneWay, StringFormat=ElapsedTime: \{0\}}"/>
+        <Button Grid.Column="2" Grid.Row="3" Content="Optimize" Margin="4,4" Command="{Binding OptimizeTargetImage}"/>
+
+        <TextBlock Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="3" Style="{StaticResource inHorizStack}" Text="{Binding ElapsedTime, Mode=OneWay, StringFormat=ElapsedTime: \{0\}}"/>
 
     </Grid>
 </Window>
